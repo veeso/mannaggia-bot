@@ -4,7 +4,7 @@
   <img src="/assets/logo.png" width="128" height="128" />
 </p>
 
-<p align="center">~ The official Telegram bot for mannaggia-bot ~</p>
+<p align="center">~ The official Telegram bot for mannaggia-py ~</p>
 <p align="center">
   <a href="https://ko-fi.com/veeso" target="_blank">Ko-fi</a>
   ·
@@ -27,14 +27,14 @@
       src="https://img.shields.io/github/stars/veeso/mannaggia-bot.svg"
       alt="Repo stars"
   /></a>
-  <a href="https://pepy.tech/project/mannaggia"
+  <a href="https://pepy.tech/project/mannaggia-bot"
     ><img
-      src="https://pepy.tech/badge/mannaggia"
+      src="https://pepy.tech/badge/mannaggia-bot"
       alt="Downloads counter"
   /></a>
-  <a href="https://pypi.org/project/mannaggia/"
+  <a href="https://pypi.org/project/mannaggia-bot/"
     ><img
-      src="https://badge.fury.io/py/mannaggia.svg"
+      src="https://badge.fury.io/py/mannaggia-bot.svg"
       alt="Latest version"
   /></a>
   <a href="https://ko-fi.com/veeso">
@@ -71,13 +71,9 @@ Mannaggia-bot is the Telegram bot for [mannaggia-py](https://github.com/veeso/ma
 2. Run mannaggia
 
     ```sh
-    mannaggia-bot --help
-    ```
-
-    or in case it's still not available in your path
-
-    ```sh
-    python3 -m mannaggia-bot
+    export LOG_LEVEL="info"
+    export TELEGRAM_API_KEY="..."
+    mannaggia-bot
     ```
 
 In case you're missing some dependencies after installation, run:

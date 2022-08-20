@@ -26,6 +26,7 @@ from telegram.ext.commandhandler import CommandHandler
 from tempfile import NamedTemporaryFile
 
 TELEGRAM_API_KEY = environ["TELEGRAM_API_KEY"]
+PORT = int(environ.get("PORT", 5000))
 
 
 def main() -> None:
@@ -51,7 +52,7 @@ def main() -> None:
     # Start the Bot
     updater.start_webhook(
         listen="0.0.0.0",
-        port=8443,
+        port=PORT,
         url_path=TELEGRAM_API_KEY,
         webhook_url="https://mannaggiapy-bot.herokuapp.com/" + TELEGRAM_API_KEY,
     )
