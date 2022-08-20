@@ -18,7 +18,7 @@ import logging
 from logging import info, debug, error
 from mannaggia.santi.factory import Factory as SantiFactory
 from mannaggia.speech.tts import TTSError
-from mannaggia.speech.google_translate import GoogleTranslateTTS
+from mannaggia.speech.espeak import ESpeakTTS
 from telegram.ext.updater import Updater
 from telegram.update import Update
 from telegram.ext.callbackcontext import CallbackContext
@@ -41,7 +41,7 @@ def main() -> None:
 
     santi = SantiFactory.make_santi_from_local()
     info(f"initialized santi database with {len(santi)} entries")
-    tts_engine = GoogleTranslateTTS()
+    tts_engine = ESpeakTTS("it")
     info("tts engine initialized!")
     updater = Updater(TELEGRAM_API_KEY, use_context=True)
     info(f"initialized telegram updater {TELEGRAM_API_KEY}")

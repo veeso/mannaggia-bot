@@ -10,7 +10,7 @@
   ·
   <a href="#get-started-">Setup</a>
   ·
-  <a href="https://github.com/veeso/mannaggia-bot" target="_blank">mannaggia-bot</a>
+  <a href="https://github.com/veeso/mannaggia-py" target="_blank">mannaggia-py</a>
 </p>
 
 <p align="center">Developed by <a href="https://veeso.github.io/" target="_blank">@veeso</a></p>
