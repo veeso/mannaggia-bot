@@ -32,7 +32,6 @@ PORT = int(environ.get("PORT", 5000))
 def main() -> None:
     # get dictionary
     global santi
-    global tts_engine
     log_level = get_loglevel(environ.get("LOG_LEVEL", "info"))
     logging.basicConfig(
         format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
@@ -41,8 +40,6 @@ def main() -> None:
 
     santi = SantiFactory.make_santi_from_local()
     info(f"initialized santi database with {len(santi)} entries")
-    tts_engine = ESpeakTTS("it")
-    info("tts engine initialized!")
     updater = Updater(TELEGRAM_API_KEY, use_context=True)
     info(f"initialized telegram updater {TELEGRAM_API_KEY}")
     updater.dispatcher.add_handler(CommandHandler("start", start))
@@ -68,6 +65,7 @@ def start(update: Update, _: CallbackContext):
 
 def say(update: Update, context: CallbackContext):
     text = update.message.text.replace("/mannaggia", "").strip()
+    tts_engine = ESpeakTTS("it")
     if len(text) == 0:
         santo = choice(santi).name
     else:
