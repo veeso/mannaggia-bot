@@ -66,6 +66,7 @@ def start(update: Update, _: CallbackContext):
 def say(update: Update, context: CallbackContext):
     text = update.message.text.replace("/mannaggia", "").strip()
     tts_engine = ESpeakTTS("it")
+    debug("using espeak")
     if len(text) == 0:
         santo = choice(santi).name
     else:
