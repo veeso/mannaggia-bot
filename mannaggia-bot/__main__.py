@@ -20,7 +20,6 @@ from mannaggia.santi.factory import Factory as SantiFactory
 from mannaggia.speech.tts import TTSError
 from mannaggia.speech.google_translate import GoogleTranslateTTS
 from telegram.ext.updater import Updater
-from telegram import Voice
 from telegram.update import Update
 from telegram.ext.callbackcontext import CallbackContext
 from telegram.ext.commandhandler import CommandHandler
@@ -50,7 +49,7 @@ def main() -> None:
     updater.dispatcher.add_handler(CommandHandler("help", help))
     info("starting telegram bot")
     # Start the Bot
-    updater.start_webhook(listen="0.0.0.0", port=5000, url_path=TELEGRAM_API_KEY)
+    updater.start_webhook(listen="0.0.0.0", port=80, url_path=TELEGRAM_API_KEY)
     updater.bot.setWebhook("https://mannaggiapy-bot.herokuapp.com/" + TELEGRAM_API_KEY)
     updater.idle()
     exit(0)
