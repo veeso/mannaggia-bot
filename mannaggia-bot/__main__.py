@@ -49,8 +49,12 @@ def main() -> None:
     updater.dispatcher.add_handler(CommandHandler("help", help))
     info("starting telegram bot")
     # Start the Bot
-    updater.start_webhook(listen="0.0.0.0", port=80, url_path=TELEGRAM_API_KEY)
-    updater.bot.setWebhook("https://mannaggiapy-bot.herokuapp.com/" + TELEGRAM_API_KEY)
+    updater.start_webhook(
+        listen="0.0.0.0",
+        port=8443,
+        url_path=TELEGRAM_API_KEY,
+        webhook_url="https://mannaggiapy-bot.herokuapp.com/" + TELEGRAM_API_KEY,
+    )
     updater.idle()
     exit(0)
 
