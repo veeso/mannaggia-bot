@@ -33,7 +33,7 @@ def main() -> None:
     # get dictionary
     global santi
     global tts_engine
-    log_level = get_loglevel(environ["LOG_LEVEL"])
+    log_level = get_loglevel(environ.get("LOG_LEVEL", "info"))
     logging.basicConfig(
         format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
         level=log_level,
