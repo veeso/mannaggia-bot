@@ -62,6 +62,14 @@ Mannaggia-bot is the Telegram bot for [mannaggia-py](https://github.com/veeso/ma
 
 ## Get started 🚀
 
+### For users
+
+Scan this QR code or go to this URL <https://t.me/mannaggiapy_bot> to start a chat with Big Luca bot, then add it to any group or chat directly with him.
+
+![telegram-qr](assets/telegram-qr.webp)
+
+### For developers
+
 1. Install mannaggia-bot with pip
 
     ```sh
