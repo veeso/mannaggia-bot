@@ -18,7 +18,7 @@ import logging
 from logging import info, debug, error
 from mannaggia.santi.factory import Factory as SantiFactory
 from mannaggia.speech.tts import TTSError
-from mannaggia.speech.espeak import ESpeakTTS
+from mannaggia.speech.google_translate import GoogleTranslateTTS
 from telegram.ext.updater import Updater
 from telegram.update import Update
 from telegram.ext.callbackcontext import CallbackContext
@@ -26,20 +26,23 @@ from telegram.ext.commandhandler import CommandHandler
 from tempfile import NamedTemporaryFile
 
 TELEGRAM_API_KEY = environ["TELEGRAM_API_KEY"]
-PORT = int(environ.get("PORT", 5000))
+PORT = int(environ.get("PORT", None))
+LOG_LEVEL = environ.get("LOG_LEVEL", "info")
 
 
 def main() -> None:
     # get dictionary
     global santi
-    log_level = get_loglevel(environ.get("LOG_LEVEL", "info"))
+    global tts_engine
     logging.basicConfig(
         format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
-        level=log_level,
+        level=get_loglevel(LOG_LEVEL),
     )
 
     santi = SantiFactory.make_santi_from_local()
     info(f"initialized santi database with {len(santi)} entries")
+    tts_engine = GoogleTranslateTTS()
+    info("initialized google translate tts engine")
     updater = Updater(TELEGRAM_API_KEY, use_context=True)
     info(f"initialized telegram updater {TELEGRAM_API_KEY}")
     updater.dispatcher.add_handler(CommandHandler("start", start))
@@ -47,12 +50,17 @@ def main() -> None:
     updater.dispatcher.add_handler(CommandHandler("help", help))
     info("starting telegram bot")
     # Start the Bot
-    updater.start_webhook(
-        listen="0.0.0.0",
-        port=PORT,
-        url_path=TELEGRAM_API_KEY,
-        webhook_url="https://mannaggiapy-bot.herokuapp.com/" + TELEGRAM_API_KEY,
-    )
+    if PORT is None:
+        info("starting bot without webhook")
+        updater.start_polling()
+    else:
+        info("starting bot with webook")
+        updater.start_webhook(
+            listen="0.0.0.0",
+            port=PORT,
+            url_path=TELEGRAM_API_KEY,
+            webhook_url="https://mannaggiapy-bot.herokuapp.com/" + TELEGRAM_API_KEY,
+        )
     updater.idle()
     exit(0)
 
@@ -65,7 +73,6 @@ def start(update: Update, _: CallbackContext):
 
 def say(update: Update, context: CallbackContext):
     text = update.message.text.replace("/mannaggia", "").strip()
-    tts_engine = ESpeakTTS("it")
     debug("using espeak")
     if len(text) == 0:
         santo = choice(santi).name
