@@ -26,7 +26,7 @@ from telegram.ext.commandhandler import CommandHandler
 from tempfile import NamedTemporaryFile
 
 TELEGRAM_API_KEY = environ["TELEGRAM_API_KEY"]
-PORT = int(environ.get("PORT", None))
+PORT = int(environ.get("PORT", 0))
 LOG_LEVEL = environ.get("LOG_LEVEL", "info")
 
 
@@ -50,7 +50,7 @@ def main() -> None:
     updater.dispatcher.add_handler(CommandHandler("help", help))
     info("starting telegram bot")
     # Start the Bot
-    if PORT is None:
+    if PORT == 0:
         info("starting bot without webhook")
         updater.start_polling()
     else:
