@@ -24,7 +24,7 @@ setup(
         "mannaggia>=0.1.4",
         "python-telegram-bot>=13.13",
     ],
-    entry_points={"console_scripts": ["mannaggia_bot = mannaggia_bot.__main__:main"]},
+    entry_points={"console_scripts": ["mannaggia-bot = mannaggia_bot.__main__:main"]},
     packages=find_packages(),
     keywords=["mannaggia", "debugging-tools", "telegram", "telegram-bot"],
     classifiers=[
