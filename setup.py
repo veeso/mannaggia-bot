@@ -10,7 +10,7 @@ README = (ROOT / "README.md").read_text(encoding="utf-8")
 
 setup(
     name="mannaggia-bot",
-    version="0.1.0",
+    version="0.1.1",
     description="mannaggia-bot is the official telegram bot for mannaggia",
     long_description=README,
     long_description_content_type="text/markdown",
